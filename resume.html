@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+
+    <title>Raymond Ran - Resume</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Source Serif 4', serif;
+            line-height: 1.3;
+            color: #333;
+            background: #f5f5f5;
+            padding: 10px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: white;
+            padding: 25px 35px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #2c3e50;
+        }
+        
+        h1 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 3px;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 11px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        
+        .contact {
+            font-size: 10px;
+            color: #666;
+        }
+        
+        h2 {
+            font-size: 14px;
+            color: #2c3e50;
+            margin-top: 12px;
+            margin-bottom: 6px;
+            padding-bottom: 3px;
+            border-bottom: 1.5px solid #3498db;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        
+        .experience-item {
+            margin-bottom: 10px;
+        }
+        
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 5px;
+        }
+        
+        .job-title {
+            font-weight: 600;
+            font-size: 11px;
+            color: #2c3e50;
+        }
+        
+        .date {
+            font-size: 10px;
+            color: #7f8c8d;
+            white-space: nowrap;
+        }
+        
+        .company {
+            font-style: italic;
+            color: #555;
+            font-size: 10px;
+            margin-bottom: 3px;
+        }
+        
+        .description {
+            font-size: 10px;
+            color: #444;
+            line-height: 1.4;
+            text-align: justify;
+        }
+        
+        .description ul {
+            margin-left: 15px;
+            margin-top: 3px;
+        }
+        
+        .description li {
+            margin-bottom: 2px;
+        }
+        
+        .education-item {
+            margin-bottom: 8px;
+        }
+        
+        .school-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+        
+        .school-name {
+            font-weight: 600;
+            font-size: 11px;
+            color: #2c3e50;
+        }
+        
+        .degree {
+            font-size: 10px;
+            color: #555;
+            margin-top: 1px;
+        }
+        
+        .skills-section {
+            margin-top: 3px;
+        }
+        
+        .skill-category {
+            margin-bottom: 5px;
+            font-size: 10px;
+        }
+        
+        .skill-label {
+            font-weight: 600;
+            color: #2c3e50;
+            display: inline-block;
+            min-width: 160px;
+        }
+        
+        .skill-items {
+            display: inline;
+            color: #444;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                padding: 20px 30px;
+                max-width: 100%;
+            }
+            
+            h2 {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>RAYMOND RAN</h1>
+            <div class="subtitle">Data Science Student | UC Berkeley</div>
+            <div class="contact">Sacramento, CA | (916) 891-8115 | ranr9131@gmail.com</div>
+        </header>
+
+        <section>
+            <h2>Education</h2>
+            
+            <div class="education-item">
+                <div class="school-header">
+                    <span class="school-name">University of California, Berkeley</span>
+                    <span class="date">Expected June 2029</span>
+                </div>
+                <div class="degree">Data Science, BA | Berkeley, CA</div>
+            </div>
+            
+            <div class="education-item">
+                <div class="school-header">
+                    <span class="school-name">Mira Loma High School</span>
+                    <span class="date">2021–2025</span>
+                </div>
+                <div class="degree">International Baccalaureate Diploma | Weighted GPA: 4.6 | Sacramento, CA</div>
+            </div>
+
+            <div class="education-item">
+                <div class="school-header">
+                    <span class="school-name">Los Rios Community Colleges</span>
+                    <span class="date">2023–2025</span>
+                </div>
+                <div class="degree">Relevant Coursework: Data Structures, Algorithms Design and Implementation, Introduction to Structured Programming, Object Oriented Programming with C++, Discrete Structures for Computer Science, Calculus 3, Introduction to Linear Algebra</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Research Experience</h2>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="job-title">LLM Embedding Research</span>
+                    <span class="date">2024–Present</span>
+                </div>
+                <div class="company">Research Assistant under Professor Gabriel Simmons | UC Davis</div>
+                <div class="description">
+                    <ul>
+                        <li>Investigating how longer-scaled LLM models enhances ontological representations</li>
+                        <li>Developing unsupervised methods for detecting ontologies within embedding spaces</li>
+                        <li>Main contributor to blog post (in progress): https://g-simmons.github.io/llm_persona_website/ontology_topology.html</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="job-title">LLM Educational Applications Research</span>
+                    <span class="date">2025–Present</span>
+                </div>
+                <div class="company">Research Assistant, BOBALAB under Professor Park Sinchaisri | UC Berkeley</div>
+                <div class="description">
+                    <ul>
+                        <li>Exploring pedagogical applications of LLMs, specifically on how educators can use LLMs for designing and developing curriculums and coursework, through various NLP techniques</li>
+                        <li>Analyzed over 500k food delivery orders using various regression models to identify factors affecting driver acceptance rates, along with temporal patterns in driver behavior</li>
+                        <li>Paper in progress</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Work Experience</h2>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="job-title">Swim Instructor & Lifeguard</span>
+                    <span class="date">2025–Present</span>
+                </div>
+                <div class="company">SafeSplash Sacramento</div>
+                <div class="description">
+                    <ul>
+                        <li>Instructor for all skill levels and age groups, guided numerous children towards independent swimming</li>
+                        <li>Ensured child safety during swim lessons</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="job-title">Front-End Developer & Designer</span>
+                    <span class="date">2023–2024</span>
+                </div>
+                <div class="company">ITCloud</div>
+                <div class="description">
+                    <ul>
+                        <li>Commissioned to design and develop the website for a multimillion-dollar systems integration company</li>
+                        <li>Completed full-stack web implementation encompassing UI/UX and front-end design</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="job-title">Lifeguard</span>
+                    <span class="date">2023</span>
+                </div>
+                <div class="company">City of Sacramento</div>
+                <div class="description">
+                    <ul>
+                        <li>Ensured aquatic safety at public swimming facilities</li>
+                        <li>Certified American Red Cross Lifeguard (expires April 2027)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Leadership & Community Service</h2>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="job-title">Founder | Sacramento Public Library Drop-in Coding Club</span>
+                    <span class="date">2024–Present</span>
+                </div>
+                <div class="description">
+                    <ul>
+                        <li>Established a weekly library community program to teach coding fundamentals to elementary and middle school students in partnership with Sacramento Public Library</li>
+                        <li>Awarded Youth Volunteer of the Year from DOVIA Sacramento for our work</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="job-title">Founder & President | Mira Loma High School Computing Club</span>
+                    <span class="date">2022–2025</span>
+                </div>
+                <div class="description">
+                    <ul>
+                        <li>Led the school coding club and developed comprehensive computer science curriculums, covering from Python basics to ML topics</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="job-title">Volunteer | Loaves & Fishes</span>
+                    <span class="date">2022–Present</span>
+                </div>
+                <div class="description">
+                    <ul>
+                        <li>70+ hours in meal preparation, cleaning, and food service for the homeless.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Technical Skills</h2>
+            <div class="skills-section">
+                <div class="skill-category">
+                    <span class="skill-label">Programming & Tools:</span>
+                    <span class="skill-items">Python, Java, R, Django, SQL, GitHub</span>
+                </div>
+                <div class="skill-category">
+                    <span class="skill-label">AI/ML Frameworks:</span>
+                    <span class="skill-items">Model Context Protocol (MCP), HuggingFace, PyTorch, Transformers, Scikit-learn</span>
+                </div>
+                <div class="skill-category">
+                    <span class="skill-label">Languages:</span>
+                    <span class="skill-items">English (Native), Mandarin (Proficient in speaking, reading, and writing)</span>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
