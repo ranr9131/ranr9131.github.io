@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Snake by Raymond Ran</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
+</head>
+<body>
+    <div class="game-container">
+        <div class="stats">
+            <span>Ep: <span id="episode">0</span></span>
+            <span>Score: <span id="score">0</span></span>
+            <span>Best: <span id="bestScore">0</span></span>
+            <span>ε (chance of random move): <span id="epsilon">1.000</span></span>
+        </div>
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        <div class="q-values">
+            <div class="q-value" id="q-left">← <span id="q-left-val">0.00</span></div>
+            <div class="q-value" id="q-right">→ <span id="q-right-val">0.00</span></div>
+            <div class="q-value" id="q-up">↑ <span id="q-up-val">0.00</span></div>
+            <div class="q-value" id="q-down">↓ <span id="q-down-val">0.00</span></div>
+        </div>
+    </div>
+
+    <div class="feature-container">
+        <div class="conv-layer">
+            <span class="conv-label">Conv1</span>
+            <div class="feature-maps" id="conv1"></div>
+        </div>
+        <div class="conv-layer">
+            <span class="conv-label">Conv2</span>
+            <div class="feature-maps" id="conv2"></div>
+        </div>
+        <div class="conv-layer">
+            <span class="conv-label">Conv3</span>
+            <div class="feature-maps" id="conv3"></div>
+        </div>
+    </div>
+
+    <div class="description">
+        <p>Snake played with Deep Q Learning.</p>
+        <p>Convolutional Neural Network with four outputs: left, right, up, down (snake dies if goes in opposite direction).</p>
+        <p>Code can be found on website github repo.</p>
+    </div>
+
+    <script src="snake.js"></script>
+    <script src="dqn.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
