@@ -216,3 +216,7 @@ a[target="_blank"]::after {
   margin: 0 3px 0 5px;
   filter: invert(1);
 }
+
+.contact-links a[target="_blank"]::after {
+  content: none;
+}
