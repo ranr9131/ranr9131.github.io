@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI for Teachers - Raymond Ran</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1.6;
+            color: #E8E4E0;
+            background: #1A1A1A;
+        }
+
+        nav {
+            background: #252525;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .blog-header {
+            background: linear-gradient(135deg, #B3945B 0%, #1A1A1A 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .blog-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .blog-meta {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .blog-meta span {
+            margin: 0 0.5rem;
+        }
+
+        .blog-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .blog-content article {
+            line-height: 1.8;
+        }
+
+        .blog-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .blog-content h2 {
+            font-size: 1.8rem;
+            color: #B3945B;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #333;
+        }
+
+        .blog-content h3 {
+            font-size: 1.4rem;
+            color: #E8E4E0;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-content h4 {
+            font-size: 1.15rem;
+            color: #D4B87A;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .abstract {
+            background: #252525;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #B3945B;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .abstract a {
+            color: #B3945B;
+            text-decoration: none;
+        }
+
+        .abstract a:hover {
+            color: #D4B87A;
+        }
+
+        .abstract p:last-child {
+            margin-bottom: 0;
+        }
+
+        .math-block {
+            background: #252525;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        figure {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        /* Option A: Float to the side */
+        figure.float-right {
+            float: right;
+            margin: 0 0 1.5rem 2rem;
+            max-width: 45%;
+            text-align: center;
+        }
+
+        figure.float-right img {
+            max-width: 100%;
+        }
+
+        /* Option B: Smaller & centered */
+        figure.small-centered {
+            max-width: 60%;
+            margin: 2rem auto;
+        }
+
+        figcaption {
+            margin-top: 0.75rem;
+            font-size: 0.95rem;
+            color: #999;
+            font-style: italic;
+        }
+
+        .cluster-list {
+            background: #252525;
+            padding: 1rem 1.5rem 1rem 2.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            columns: 2;
+            column-gap: 2rem;
+        }
+
+        .cluster-list li {
+            margin-bottom: 0.3rem;
+            color: #E8E4E0;
+        }
+
+        .cluster-sequences {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            background: #252525;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            columns: 3;
+            column-gap: 1.5rem;
+        }
+
+        .cluster-sequences .sequence {
+            padding: 0.25rem 0;
+        }
+
+        .cluster-sequences .teacher-label {
+            color: #B3945B;
+            font-weight: 500;
+        }
+
+        .cluster-sequences .sequence-array {
+            color: #E8E4E0;
+        }
+
+        .metrics-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #252525;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+        }
+
+        .metrics-table th,
+        .metrics-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        .metrics-table th {
+            background: #1A1A1A;
+            color: #B3945B;
+            font-weight: 600;
+        }
+
+        .metrics-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .metrics-table tr:hover {
+            background: #2a2a2a;
+        }
+
+        .metrics-table tr.highlight-red {
+            background: rgba(255, 100, 100, 0.08);
+        }
+
+        .metrics-table tr.highlight-red:hover {
+            background: rgba(255, 100, 100, 0.18);
+        }
+
+        .metrics-table tr.highlight-green {
+            background: rgba(100, 255, 100, 0.08);
+        }
+
+        .metrics-table tr.highlight-green:hover {
+            background: rgba(100, 255, 100, 0.18);
+        }
+
+        footer {
+            background: #252525;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        footer a {
+            color: #B3945B;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #D4B87A;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 56px;
+            left: 0;
+            height: 3px;
+            background: white;
+            width: 0%;
+            z-index: 99;
+            transition: width 0.1s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+            }
+
+            .blog-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .blog-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .blog-content h3 {
+                font-size: 1.25rem;
+            }
+
+            .cluster-sequences {
+                columns: 1;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar"></div>
+    <nav>
+        <div class="container">
+            <div class="logo"></div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="blog-header">
+        <h1>AI for Teachers: Investigating Pedagogical Applications of Large Language Models</h1>
+        <p class="blog-meta">
+            <span>Raymond Ran</span> |
+            <span>16 January 2026</span>
+        </p>
+    </header>
+
+    <main class="blog-content">
+        <article>
+            <div class="abstract">
+                <p>I've used AI to help me with school assignments before, and if you're a student in 2026, it's likely you have as well. Nonetheless, as easily as it was for AI to complete those assignments, what about to create them? The following is a summary of my work studying pedagogical applications of large language models under Professor Park Sinchaisri at Berkeley Operations and Behavioral Analytics Lab (BOBALAB) as a part of URAP.</p>
+                <p>All code can be found at <a href="https://github.com/ranr9131/ai_teachers" target="_blank">github.com/ranr9131/ai_teachers</a></p>
+            </div>
+
+            <h2>1. Introduction</h2>
+            <p>Emergent innovations in generative AI are continuing to show their capabilities in completing tasks and subsequently accelerating the efficiency of workers at a revolutionary rate. Notably large language models, such as ChatGPT, have changed the workflow of countless occupations and their individual approaches to solving problems. An example being grade school teachers, where generative AI could potentially be used to create teaching curriculums, or grade homework.</p>
+            <p>In this experiment, a group of 24 teachers were instructed to use ChatGPT in a way that helps them generate coursework, provide advice for teaching a certain subject, etc. The teachers also self-reported scores of output productivity (a score of how useful ChatGPT's responses were) and whether or not they had clear goals coming into this experiment.</p>
+            <p>Our goal was to answer the following inquiries: Are there patterns in how teachers approached prompting ChatGPT? Which prompts resulted in more desirable outputs?</p>
+
+            <h2>2. Methodology</h2>
+
+            <h3>2.1 Connectedness</h3>
+            <p>We propose a connectedness metric for evaluating how closely related a group of prompts are to each other. Using agglomerative clustering with sentence embeddings (retrieved from pre-trained all-MiniLM-L6-v2), a connectedness score is measured as a ratio of the number of clusters to the number of prompts.</p>
+
+            <div class="math-block">
+                \[
+                \text{connectedness}(P) = \frac{|C|}{|P|}
+                \]
+                \[
+                \text{where } P = \{p_1, p_2, \ldots, p_m\} \text{ is the set of prompts}
+                \]
+                \[
+                C \text{ is the set of clusters}
+                \]
+            </div>
+
+            <p>The intuition here being if there are a lot of clusters relative to prompts, then the prompts are distantly related. Note: A threshold of 1 was used for the clustering. Other methods of evaluating connectedness were used as well, such as pairwise cosine similarity.</p>
+
+            <h3>2.2 Response Similarity</h3>
+            <p>Including the initial responses that the teachers received from ChatGPT, we generated additional responses ourselves, using the same prompts verbatim. A prompt is "noisy" if the outputs generated from that prompt show variety. We propose a response-similarity metric for prompts, measured as a mean pairwise cosine similarity between output sentence embeddings.</p>
+
+            <div class="math-block">
+                $$\begin{align*}
+                \text{response-similarity}(O) &= \frac{2}{n(n-1)} \sum_{i &lt; j} \frac{\mathbf{e}_i^T \mathbf{e}_j}{\|\mathbf{e}_i\| \|\mathbf{e}_j\|} \\
+                \text{where } & O = \{o_1, o_2, \ldots, o_n\} \text{ is the set of outputs} \\
+                & n = |O| \\
+                & \mathbf{e}_i = f_{\text{embed}}(o_i) \text{ is the embedding of output } o_i
+                \end{align*}$$
+            </div>
+
+            <h2>3. Results</h2>
+
+            <h3>3.1 Are there patterns in how teachers approached prompting ChatGPT?</h3>
+
+            <h4>3.1.1 Furthering categories of teacher prompts</h4>
+            <p>Prior to this work, teacher prompts were qualitatively categorized into four categories: <em>make for me</em>, <em>find for me</em>, <em>jumpstart for me</em>, and <em>iterate with me</em>. Furthering this idea, we investigated how the sequences of prompts for each teacher explored these categories, revealing how certain teachers approach prompting ChatGPT over time.</p>
+            <p>To expand on these previous classifications, we used agglomerative clustering to categorize all 201 prompts based on their sentence embeddings. Using a threshold of 2.2, we ended with eight clusters:</p>
+
+            <ol class="cluster-list">
+                <li>Factual requests</li>
+                <li>Output requests</li>
+                <li>Output edits (short requests)</li>
+                <li>Spanish</li>
+                <li>Student-related requests</li>
+                <li>Output edits (long requests)</li>
+                <li>Math</li>
+                <li>Diagram requests</li>
+            </ol>
+
+            <p>These clusters seem to be subsets of the original four categories, with cluster 1 and 2 reminiscent of the <em>find for me</em> and <em>make for me</em> categories respectively. However, clusters 3 and 6 reveal a new category of teacher prompts: follow up questions to previous <em>make for me</em> outputs.</p>
+
+            <h4>3.1.2 A generalization of how teachers prompt</h4>
+            <p>By labeling the prompts with their corresponding cluster in each teacher sequence, patterns begin to emerge.</p>
+
+            <div class="cluster-sequences">
+                <div class="sequence"><span class="teacher-label">Teacher 1:</span> <span class="sequence-array">2, 2, 2, 2, 2, 5, 2</span></div>
+                <div class="sequence"><span class="teacher-label">Teacher 2:</span> <span class="sequence-array">1, 2, 1</span></div>
+                <div class="sequence"><span class="teacher-label">Teacher 3:</span> <span class="sequence-array">2, 2, 2, 2, 2, 2, 2, 2, 3, 1, 3, 2, 6, 6</span></div>
+                <div class="sequence"><span class="teacher-label">Teacher 4:</span> <span class="sequence-array">1, 1, 1, 1, 1</span></div>
+                <div class="sequence"><span class="teacher-label">Teacher 5:</span> <span class="sequence-array">6, 6, 6, 4, 6</span></div>
+                <div class="sequence"><span class="teacher-label">Teacher 6:</span> <span class="sequence-array">6, 3, 2, 5, 1</span></div>
+                <div class="sequence"><span class="teacher-label">Teacher 7:</span> <span class="sequence-array">1, 1, 1, 1, 1, 1, 3</span></div>
+                <div class="sequence"><span class="teacher-label">Teacher 8:</span> <span class="sequence-array">5, 2, 2, 3, 3, 3, 5, 5, 1, 6, 1, 1, 3, 6, 6</span></div>
+                <div class="sequence"><span class="teacher-label">Teacher 9:</span> <span class="sequence-array">2, 2, 5, 5, 5, 2, 2, 5, 3, 3</span></div>
+                <div class="sequence"><span class="teacher-label">Teacher 10:</span> <span class="sequence-array">1, 1, 1, 1, 6, 2, 1, 6</span></div>
+                <div class="sequence"><span class="teacher-label">Teacher 11:</span> <span class="sequence-array">5, 5, 3, 3</span></div>
+                <div class="sequence"><span class="teacher-label">Teacher 12:</span> <span class="sequence-array">6, 6, 4, 4, 4, 6, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4</span></div>
+                <div class="sequence"><span class="teacher-label">Teacher 13:</span> <span class="sequence-array">1, 1, 1, 6, 1, 1</span></div>
+                <div class="sequence"><span class="teacher-label">Teacher 14:</span> <span class="sequence-array">4, 1, 6, 4, 6, 4, 1, 5</span></div>
+                <div class="sequence"><span class="teacher-label">Teacher 15:</span> <span class="sequence-array">7, 7, 7, 7</span></div>
+                <div class="sequence"><span class="teacher-label">Teacher 16:</span> <span class="sequence-array">5, 6, 5, 1, 6, 6, 5, 3, 1, 6, 6</span></div>
+                <div class="sequence"><span class="teacher-label">Teacher 17:</span> <span class="sequence-array">6, 5, 7</span></div>
+                <div class="sequence"><span class="teacher-label">Teacher 18:</span> <span class="sequence-array">2, 6, 2, 2, 2, 2, 6, 6</span></div>
+                <div class="sequence"><span class="teacher-label">Teacher 19:</span> <span class="sequence-array">6, 6</span></div>
+                <div class="sequence"><span class="teacher-label">Teacher 20:</span> <span class="sequence-array">1, 1, 1, 3, 6, 1, 3, 3, 3, 3, 3</span></div>
+                <div class="sequence"><span class="teacher-label">Teacher 21:</span> <span class="sequence-array">1, 1, 1, 1, 1, 1, 1, 1, 6, 6, 1, 1, 1, 1, 1, 3, 1</span></div>
+                <div class="sequence"><span class="teacher-label">Teacher 22:</span> <span class="sequence-array">7, 6, 7, 7, 7, 6, 5, 5, 1, 2, 5, 5</span></div>
+                <div class="sequence"><span class="teacher-label">Teacher 23:</span> <span class="sequence-array">7, 7, 5, 7, 5, 2, 5, 5, 7, 7</span></div>
+                <div class="sequence"><span class="teacher-label">Teacher 24:</span> <span class="sequence-array">5, 6, 5, 8, 8, 8, 8, 1, 8</span></div>
+            </div>
+
+            <p>One such pattern is a long sequence of cluster 1 prompts, followed with a prompt from cluster 3 or 6. We call this Sequence 1. Teachers 4, 7, 10, 13, 20, and 21 all followed this general sequence. Analyzing Sequence 1 qualitatively, it follows that teachers who fell into this category first clarified or asked for factual information, before moving on to follow up questions regarding outputs made by ChatGPT.</p>
+
+            <p>Another pattern is a sequence of cluster 2 prompts, ending with prompts from clusters 3, 5, and 6. We will call this Sequence 2, with teachers 1, 3, 8, 9, and 18 falling under this category. Generally, these teachers began Sequence 2 with <em>make for me</em> requests, before refining them to better suit their teaching environment through follow up prompts. These follow up prompts often included inquiries about students (cluster 5), much of which aimed to make ChatGPT's outputs more suited towards the teacher's intended audience. It seems that teachers that followed Sequence 2 have an idea of what they want in terms of class material, and subsequently guide ChatGPT's responses towards their ideal coursework through the follow up prompts.</p>
+
+            <p>It should be noted that Sequence 1 and Sequence 2 often do not describe a teacher's entire prompt sequence, but rather a segment of their entire conversation. This implies that throughout a teacher's prompting journey, they may fall in and out of these sequences, or even move from sequence to sequence.</p>
+
+            <p>Moreover, out of the teachers that self-reported having clear/unclear goals before this investigation, only one of the Sequence 1 teachers reported having no clear goals, and every Sequence 2 teacher had either clear goals or some ideas. This suggests that teachers with at least an idea of what they wanted out of ChatGPT approached prompting with deliberate structure, generalized into Sequence 1 and Sequence 2. It would also make sense that teachers with clear goals have an idea of what outputs they want out of ChatGPT, explaining the reason for the follow up questions at the end of both Sequence 1 and 2, as teachers attempt to find a balance between ChatGPT's coursework and their own ideas of what material they want.</p>
+
+            <p>It should be noted that there was no statistical difference of output productivity between teachers that did or did not follow a sequence, or between sequence 1 and 2.</p>
+
+            <h3>3.2 Which prompts resulted in more desirable outputs?</h3>
+
+            <h4>3.2.1 Connectedness and output productivity</h4>
+            <p>As part of investigating any aspects of prompting that teachers could control that would increase the effectiveness of ChatGPT, we compared the teachers' self reported scores of output productivity to their connectedness (Section 2.1).</p>
+
+            <figure class="float-right">
+                <img src="figures/connectedness_vs_output_productivity.png" alt="Scatter plot showing connectedness vs output productivity">
+                <figcaption>Figure 1: Connectedness of prompts vs. self-reported output productivity scores</figcaption>
+            </figure>
+
+            <p>As seen on Figure 1, connectedness of prompts and output quality are positively correlated, as indicated by a Pearson Correlation Coefficient of 0.32.</p>
+
+            <p>These results indicate that teachers with related/structured prompts gained more productivity from ChatGPT than those with varied prompts. In a worst-case example, it suggests that asking ChatGPT questions from different subjects or for different requests would be suboptimal for response effectiveness.</p>
+
+            <p>Another interpretation of this figure is that teachers without connected prompts in the first place would default towards ChatGPT being ineffective anyways. However, it can be seen in Figure 1 how spread out teachers are in regards to having clear/unclear goals, indicating that having clear goals does not correlate to connectedness or output productivity, and thus having negative thoughts about ChatGPT's effectiveness prior to the experiment likely would not affect sentiment towards the final productivity ranking.</p>
+
+            <h4>3.2.2 Teacher experience</h4>
+            <p>The amount of teaching experience of each teacher was recorded as well.</p>
+
+            <figure class="float-right">
+                <img src="figures/connectedness_vs_yrs_experience_someideas.png" alt="Scatter plot showing years of experience vs connectedness">
+                <figcaption>Figure 2: Years of teaching experience vs. connectedness of prompts</figcaption>
+            </figure>
+
+            <p>Figure 2 displays the relationship between years of teaching experience against the connectedness of their prompts. While they may not be correlated, the teachers with no clear goals approaching ChatGPT statistically have more years of experience than the others, with a p-value of 0.005 using a statistical t-test (disregarding teachers that did not respond). This hints that older teachers may not know what to do with AI and how AI could be of use to their teaching. They may lack the exposure to AI needed to gain the technical literacy of prompting ChatGPT. Moreover, they may view these tools with skepticism and feel that it would not benefit them, hence having no clear goals going into this experiment. It could also be a result of a teacher-student relationship regarding use of AI in school, where students are often discouraged and punished for the use of these tools on classwork, indirectly discouraging teachers from using them as well out of respect for hypocrisy.</p>
+
+            <h4>3.2.3 Prompt noise</h4>
+            <p>Response-similarity metrics (Section 2.2) were computed for all prompts, and mean scores between prompt clusters (Section 3.1.1) can be seen below.</p>
+
+            <table class="metrics-table">
+                <thead>
+                    <tr>
+                        <th>Cluster</th>
+                        <th>Description</th>
+                        <th>Response Similarity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Factual requests</td>
+                        <td>0.818</td>
+                    </tr>
+                    <tr class="highlight-red">
+                        <td>2</td>
+                        <td>Output requests</td>
+                        <td>0.691</td>
+                    </tr>
+                    <tr class="highlight-red">
+                        <td>3</td>
+                        <td>Output edits (short)</td>
+                        <td>0.687</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Spanish</td>
+                        <td>0.802</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Student-related</td>
+                        <td>0.813</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Output edits (long)</td>
+                        <td>0.787</td>
+                    </tr>
+                    <tr class="highlight-green">
+                        <td>7</td>
+                        <td>Math</td>
+                        <td>0.879</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Diagram requests</td>
+                        <td>0.776</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Interestingly, the mean response-similarities of prompts in clusters 2 and 3 were statistically significantly lower than the others, as measured by a statistical t-test between cluster 2/3 and the rest of the clusters. Combined, prompts in clusters 2 and 3 both involve asking ChatGPT for outputs; cluster 2 prompts tend to initialize the output, and cluster 3 prompts tend to be follow up instructions for refining a previous output. This suggests that when asking ChatGPT to generate outputs such as course material or curriculums, the resulting responses have more variety than something like factual information.</p>
+
+            <p>On the contrary, the mean response-similarities of prompts in cluster 7 were significantly higher than other prompts. Prompts belonging to cluster 7 mainly involved math, often asking ChatGPT to show/solve a certain type of problem. It seems intuitive that responses to these prompts would show less variety, as math problems of this level are largely concrete and straightforward.</p>
+
+            <h2>4. Limitations & Conclusion</h2>
+
+            <h3>4.1 NLP Metrics</h3>
+            <p>Much of my work in the beginning was focusing on finding correlations between prompt attributes and desirable traits in ChatGPT's responses. The goal was to find concrete ways for teachers (and users in general) to improve their prompts in order to obtain better outputs. However, none of my findings were fruitful. This is likely due to a limited sample size, as a dataset with only 201 prompts likely would not be able to fully utilize the NLP techniques I was using.</p>
+
+            <p>Nonetheless, my work shows interesting relationships between teachers' output productivity and connectedness, along with what having clear goals may reveal about a teacher's prompting sequence and their age.</p>
+
+        </article>
+    </main>
+
+    <footer>
+        <p><a href="index.html">&larr; Back Home</a></p>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = (scrollTop / scrollHeight) * 100;
+            document.querySelector('.progress-bar').style.width = progress + '%';
+        });
+    </script>
+</body>
+</html>
