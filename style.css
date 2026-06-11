@@ -111,26 +111,29 @@ section h2 {
 }
 
 .project-card {
-    background: #252525;
-    border-radius: 8px;
-    padding: 2rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
+    background: #222222;
+    border-radius: 4px;
+    padding: 1.5rem;
+    border: 1px solid #333;
+    transition: border-color 0.2s;
 }
 
 .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+    border-color: #B3945B;
 }
 
 .project-card h3 {
     color: #B3945B;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+    font-size: 1.1rem;
 }
 
 .project-card p {
-    color: #E8E0E9;
-    margin-bottom: 1rem;
+    color: #a0a0a0;
+    margin-bottom: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
 }
 
 .skills {
@@ -208,8 +211,6 @@ footer {
         font-size: 2rem;
     }
 }
-
-
 
 a[target="_blank"]::after {
   content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
